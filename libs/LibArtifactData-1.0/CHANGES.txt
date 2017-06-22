@@ -1,0 +1,44 @@
+tag ed7e65b9e244eb06570e76e19588057ba66f4ffe 1.2
+Author:	Rainrider <rainrider.wow@gmail.com>
+Date:	Fri Mar 31 01:24:30 2017 +0200
+
+Version 1.2
+
+Not compatible with 7.1!
+
+commit 3e228e2c0c679c53553ad29f8292d85008f517a2
+Author: Rainrider <rainrider.wow@gmail.com>
+Date:   Fri Mar 31 01:21:26 2017 +0200
+
+    Take ARTIFACT_CLOSE and ARTIFACT_MAX_RANKS_UPDATE into account
+    
+    Blizzard does not handle ARTIFACT_MAX_RANKS_UPDATE, but better safe than
+    sorry
+
+commit 45dc50f089d41179a87aa2f26e89617af0c9a2f6
+Author: Rainrider <rainrider.wow@gmail.com>
+Date:   Fri Mar 31 00:49:42 2017 +0200
+
+    Exclude Underlight Angler when getting knowledge values
+    
+    It does not profit from nowledge level and multiplier and returns 0 and
+    1 respectively
+
+commit fb6c38dc0aab61bd9853754601b7936f59949ddf
+Author: Rainrider <rainrider.wow@gmail.com>
+Date:   Fri Mar 31 00:39:53 2017 +0200
+
+    Don't try to scan locked relics
+
+commit e07c5bfec3f74db71b0610c37521f47ed2075557
+Author: Rainrider <rainrider.wow@gmail.com>
+Date:   Fri Mar 31 00:34:27 2017 +0200
+
+    Remove compatibility for patch 7.1
+
+commit 751a27d48ac107c1edeee6824b7d3b2b2403ecf8
+Author: Rainrider <rainrider.wow@gmail.com>
+Date:   Fri Mar 31 00:07:13 2017 +0200
+
+    Update for relics API changes
+
