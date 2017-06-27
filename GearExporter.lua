@@ -1,6 +1,8 @@
 local GearExporter = _G.GearExporter
 local LAD = LibStub("LibArtifactData-1.0")
 
+local kekeke = nil
+
 local _MAST, _CRIT, _HAST, _VERS = "Mastery", "Critical Strike", "Haste", "Versatility"
 local _AGY, _STR, _INT ="Agility", "Strength", "Intellect"
 
@@ -9,7 +11,9 @@ SLASH_GEAREXPORTER2 = "/ge"
 
 
 function SlashCmdList.GEAREXPORTER(msg, editbox)
-    --print(msg)
+	if msg ~= "" then
+		kekeke = msg
+	end
 	Show()
 end
 
@@ -87,6 +91,9 @@ function Show()
             for i = 1, #slots do
                 local slotID = GetInventorySlotInfo(slots[i])
                 local itemLink = GetInventoryItemLink("player", slotID)
+				if slots[i] == "BackSlot" and kekeke ~= nil then
+					itemLink = kekeke
+				end
                 local item = GetInfo(itemLink, true)
                 if slots[i] == "MainHandSlot" then
                     local _, data = LAD:GetArtifactRelics()
@@ -216,6 +223,13 @@ function GetClass(t)
     end
 end
 
+function printDebug(t, v)
+
+	local g
+	if v == nil then g = "n" else g = v end
+	print(t.. " " .. g)
+end
+
 function GetInfo(link, gear)
     local f = CreateFrame('GameTooltip', 'GearExporter_Scanning', UIParent, 'GameTooltipTemplate')
     f:SetOwner(UIParent, 'ANCHOR_NONE')
@@ -224,6 +238,7 @@ function GetInfo(link, gear)
     local returner = {}
     returner.id = GetID(link)
     local tierFound = false
+	--print(link)
     for i = 1, f:NumLines() do
         local t = _G["GearExporter_ScanningTextLeft" .. i]:GetText()
         local s = ""
@@ -235,6 +250,7 @@ function GetInfo(link, gear)
         if i == 1 then
             returner.name = GetLine(t, "")
         end
+
 
 
 
@@ -331,12 +347,14 @@ function GetInfo(link, gear)
             local stat = GetLine(t, "", j+1)
             local insert = true
             if stat == _AGY or stat == _STR or stat == _INT then
+				--print("found stat")
                 stat = "hyb"
                 if not hyb then hyb = true
                 else insert = false end
             end
             if stat == "Stamina" then insert = false end
             if insert then
+				--print("inserted " .. stat .. " with " .. value)
                 if stat ~= "hyb" then stat = LowerStat(stat) end
                 returner[stat] = value
             end
@@ -355,10 +373,11 @@ function GetInfo(link, gear)
                 end
                 j = j + 1
             end
+
             value, j = GetLine(t, " ", j)
             stat = LowerStat(GetLine(t, "|", j+1))
-            returner[stat] = tonumber(returner[stat]) + tonumber(value)
-
+			if returner[stat] == nil then returner[stat] = value
+			else returner[stat] = tonumber(returner[stat]) + tonumber(value) end
         end
     end
     return returner
@@ -366,7 +385,9 @@ end
 
 function LowerStat(stat)
     local s = ""
-    if stat == _MAST then
+	if stat == _AGY or stat == _INT or stat == _STR then
+		s = "hyb"
+    elseif stat == _MAST then
         s = "mastery"
     elseif stat == _HAST then
         s = "haste"
