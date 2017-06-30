@@ -104,7 +104,7 @@ function Show_GE()
                     item.relics = relics
                 end
                 table.insert(items, item)
-                Write(items, w.a.CopyChatBox)
+                Write_GE(items, w.a.CopyChatBox)
             end
         end
     end)
@@ -127,7 +127,7 @@ function Show_GE()
     end)
 end
 
-function Write(items, editbox)
+function Write_GE(items, editbox)
     editbox:SetText("")
     local slots = {"Head", "Neck", "Shoulder", "Back", "Chest", "Wrist", "Hands", "Waist", "Legs", "Feet", "Finger1", "Finger2", "Trinket1", "Trinket2", "mainHand"}
     for i = 1, #items do
@@ -590,7 +590,7 @@ function Journal_Click_GE(self, elapsed)
                 local item = GetInfo(self.link)
 
                 local cText = w.b.CopyChatBox:GetText()
-                local aText = Write({item}, w.b.CopyChatBox)
+                local aText = Write_GE({item}, w.b.CopyChatBox)
                 local eText = cText .. aText
                 w.b.CopyChatBox:SetText(eText)
 				--w.b.CopyChatBox:SetText(w.b.CopyChatBox:GetText() .. self.link .. ";")
