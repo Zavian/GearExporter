@@ -14,7 +14,7 @@ function SlashCmdList.GEAREXPORTER(msg, editbox)
 	if msg ~= "" then
 		kekeke = msg
 	end
-	Show()
+	Show_GE()
 end
 
 local w
@@ -46,7 +46,7 @@ function GetID(item)
 	else return nil end
 end
 
-function Show()
+function Show_GE()
     --print("kek")
     w = CreateFrame("Frame", "GearExporter_Window", UIParent, "ThinBorderTemplate")
     MakeMovable(w)
