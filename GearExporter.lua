@@ -172,6 +172,8 @@ function Write_GE(items, editbox)
         editbox:Insert(s)
         if #items == 1 then
             return s
+        elseif #items > 1 and i == #items then 
+            editbox:Insert(select(2, GetAverageItemLevel())..";")
         end
     end
 end
