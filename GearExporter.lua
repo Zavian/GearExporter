@@ -205,11 +205,11 @@ function GetSlot(t)
 end
 
 function GetDifficulty(t)
-    local difficulties = { "Heroic", "Mythic" }
+    local difficulties = { "Normal", "Heroic", "Mythic" }
     for i = 1, #difficulties do
         if t:lower():find(difficulties[i]:lower()) then return difficulties[i] end
     end
-    return "Normal"
+    return nil
 end
 
 function GetTier(t)
@@ -279,7 +279,7 @@ function GetInfo(link, gear)
             -----------------
             -- Get Difficulty
             -----------------
-            if i == 3 then
+            if GetDifficulty(t) ~= nil and returner.difficulty == nil then
                 returner.difficulty = GetDifficulty(t)
             end
 
